@@ -3,3 +3,5 @@ numpy
 nltk
 torch
 jupyter
+click
+tqdm
