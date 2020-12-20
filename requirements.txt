@@ -5,3 +5,4 @@ torch
 jupyter
 click
 tqdm
+tables
