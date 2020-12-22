@@ -3,6 +3,7 @@ numpy
 nltk
 torch
 jupyter
+wikipedia-api
 click
 tqdm
 tables
