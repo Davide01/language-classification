@@ -7,3 +7,5 @@ click
 tqdm
 tables
 sklearn
+fastapi
+uvicorn
