@@ -7,6 +7,7 @@ For development I used the anaconda environment manager.
 ```bash
 conda create --name lan_wire python==3.7
 conda activate lan_wire
+pip install -r requirements.txt
 ```
 
 ## Data
@@ -54,7 +55,8 @@ The checkpoints of the models will are saved in
 app/lang_model/data/models/{modelname}/{accuracy}_.pt.
 ```
 
-More details can be find in the notebook modelling.py
+More details can be find in the notebook modelling.py.
+The highest accuracy achieved was 89 %. Of course, this can be further tuned, with improving the data, hyperparameter tuning and achitecture tuning.
 
 ## Rest API
 
@@ -69,6 +71,8 @@ uvicorn main:app --reload
 
 The requests are accepted at url "/lang" and must contain a url parameter "text" with a text in ont of the three languages (danish, swedish or norwegian).
 The return will contain the language of the text.
+
+The implementation can be found in the app/lang_model folder, while the API is in the main.py file.
 
 ## Running from docker
 
