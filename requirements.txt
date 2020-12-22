@@ -6,3 +6,4 @@ jupyter
 click
 tqdm
 tables
+sklearn
