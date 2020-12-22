@@ -1,1 +1,5 @@
 data/*
+
+app/lang_model/data/da/*
+app/lang_model/data/sv/*
+app/lang_model/data/no/*
