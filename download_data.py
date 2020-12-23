@@ -3,7 +3,7 @@ import wikipediaapi as wikiapi
 import click
 
 
-DATA_DIR = "data"
+DATA_DIR = os.path.join("app", "lang_model", "data")
 
 
 class WikiDataDownloader:
