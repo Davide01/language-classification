@@ -12,7 +12,7 @@ app = FastAPI()
 )
 def language(text: str):
     try:
-        recognize = RecognizeLang()
+        recognize = RecognizeLang(model_name="lstm")
         language = recognize.recognize(text)
         print(f"Language {language}")
         return str(language)
