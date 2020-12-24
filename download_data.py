@@ -10,8 +10,12 @@ class WikiDataDownloader:
     def __init__(self, country: str, topic: str):
         self.country = country
         self.topic = topic
-        self.folder_path = os.path.join(DATA_DIR, country)
         self.wiki = wikiapi.Wikipedia(country)
+        self.__set_folder(country=country)
+
+    def __set_folder(self, country: str):
+        self.folder_path = os.path.join(DATA_DIR, country)
+        os.makedirs(self.folder_path, exist_ok=True)
 
     def _download_for_country(self, categorymembers, level=0, max_level=1):
         for c in categorymembers.values():
@@ -31,7 +35,7 @@ class WikiDataDownloader:
                 print(title)
                 file.write(page.text)
         except OSError as e:
-            print(f"Error downloading {title}.")
+            print(f"Error downloading {title}. {e.args}")
 
     def download(self):
         cat = self.wiki.page(f"Category:{self.topic}")
