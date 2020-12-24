@@ -14,7 +14,7 @@ class RecognizeLang:
 
         # Lookup table
         self.__construct_lookup()
-        self.model = LangRecognizer(vocab_size=len(self.w2i))
+        self.model = LangRecognizer(vocab_size=len(self.w2i), name=model_name)
         self.label_dict = {0: "Danish", 1: "Swedish", 2: "Norwegian"}
 
     def __load_vocab(self):
