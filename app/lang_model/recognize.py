@@ -2,9 +2,12 @@ import os
 import pickle
 import nltk
 import re
+import numpy as np
 from typing import List
-from lang_model import VOCAB_PATH
+from sklearn import preprocessing
+from lang_model import VOCAB_PATH, ENCODER_PATH
 from lang_model.recognizer import LangRecognizer
+from lang_model.utils import map_language_code
 
 
 class RecognizeLang:
@@ -15,7 +18,7 @@ class RecognizeLang:
         # Lookup table
         self.__construct_lookup()
         self.model = LangRecognizer(vocab_size=len(self.w2i), name=model_name)
-        self.label_dict = {0: "Danish", 1: "Norwegian", 2: "Swedish"}
+        self.__load_encoder()
 
     def __load_vocab(self):
         path = os.path.join(VOCAB_PATH, "vocab.data")
@@ -25,11 +28,14 @@ class RecognizeLang:
     def __construct_lookup(self):
         self.w2i = {word: i for i, word in enumerate(self.vocab)}
 
+    def __load_encoder(self):
+        self.label_encoder = preprocessing.LabelEncoder()
+        self.label_encoder.classes_ = np.load(os.path.join(ENCODER_PATH, "encoder_classes.npy"), allow_pickle=True)
+
     def recognize(self, text: str):
         # Lowercase and remove numbers
         text = re.sub(r"\d", "", text.lower())
         tokens = self._tokenize(text=text)
-        print(tokens)
 
         # Get indexes from the vocalbulary
         input = [self.w2i[token] for token in tokens if token in self.w2i]
@@ -39,7 +45,8 @@ class RecognizeLang:
             raise ValueError("Words not recognized.")
 
         lang_index = self.model.predict(input)
-        return self.label_dict[lang_index]
+        language_code = self.label_encoder.inverse_transform([lang_index])
+        return map_language_code(language_code[0])
 
     @staticmethod
     def _tokenize(text: str) -> List[str]:
