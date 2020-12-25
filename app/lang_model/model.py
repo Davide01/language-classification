@@ -6,10 +6,10 @@ from torch.nn.functional import softmax
 class LangModel(nn.Module):
     def __init__(self, vocab_size):
         super(LangModel, self).__init__()
-        self.embeddings = nn.Embedding(vocab_size, 32)
+        self.embeddings = nn.Embedding(vocab_size, 64)
 
         self.rnn_1 = nn.LSTM(
-            input_size=32,
+            input_size=64,
             hidden_size=100,
             num_layers=2,
             bidirectional=True,
@@ -28,7 +28,6 @@ class LangModel(nn.Module):
 
     def forward(self, x):
         out = {}
-
         # get embeddings
         x = self.embeddings(x)
 
@@ -39,5 +38,4 @@ class LangModel(nn.Module):
 
         # classify
         out["out"] = softmax(self.l_out(x), dim=1)
-        print(out)
         return out

@@ -14,7 +14,6 @@ def language(text: str):
     try:
         recognize = RecognizeLang(model_name="lstm")
         language = recognize.recognize(text)
-        print(f"Language {language}")
         return str(language)
     except ValueError as ve:
         return ve.args

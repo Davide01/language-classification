@@ -8,14 +8,14 @@ from lang_model.recognizer import LangRecognizer
 
 
 class RecognizeLang:
-    def __init__(self, model_name: str = "LSTM") -> None:
+    def __init__(self, model_name: str = "lstm") -> None:
         # Vocalbulary
         self.__load_vocab()
 
         # Lookup table
         self.__construct_lookup()
         self.model = LangRecognizer(vocab_size=len(self.w2i), name=model_name)
-        self.label_dict = {0: "Danish", 1: "Swedish", 2: "Norwegian"}
+        self.label_dict = {0: "Danish", 1: "Norwegian", 2: "Swedish"}
 
     def __load_vocab(self):
         path = os.path.join(VOCAB_PATH, "vocab.data")
@@ -29,6 +29,7 @@ class RecognizeLang:
         # Lowercase and remove numbers
         text = re.sub(r"\d", "", text.lower())
         tokens = self._tokenize(text=text)
+        print(tokens)
 
         # Get indexes from the vocalbulary
         input = [self.w2i[token] for token in tokens if token in self.w2i]
