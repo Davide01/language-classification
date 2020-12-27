@@ -1,3 +1,5 @@
+"""This class is responsible for recognizing the language. 
+It holds the vocabulary, lookup table, encoder and the recognizer."""
 import os
 import pickle
 import nltk
