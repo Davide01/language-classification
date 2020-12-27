@@ -20,7 +20,7 @@ The data can be downloaded running the download_data.py script.
 python download_data.py
 ```
 
-You must specify the language code (da/sv/no) and the title of the topic for which the data should be downloaded. The title must be specified in the language you want to download for. For the training data the Politics and Nature title was used. The more topics and data you download the bigger the vocalbulary and the model will be, thus the more accurate predictions you will get.
+You must specify the language code (da/sv/no) and the title of the topic for which the data should be downloaded. The title must be specified in the language you want to download for. For the training data the Politics and Nature title was used. For training the model 81000 data samples were used, which was divided into train and test set. The constructed vocabulary consisted of 164700 words. The more topics and data you download the bigger the vocalbulary will be, thus the more accurate predictions you will get. 
 
 ## Preprocessing
 
@@ -42,7 +42,7 @@ The data was divided into train and test set in ratio 80%/20%.
 The pytorch framework was used for model development.
 A two layer LSTM network with three feed forward layers on the top was developed. Batchnorm and Dropout was used to avoid overfitting. ReLU was used as activation function between the layers and softmax after the last layer to distribute the probabilities across the labels.
 A vocabulary was constructed from the train and test data in order to encode the input to numeric values.
-A lookup table was constructed to get the indexes from the vocabulary.
+A lookup table was constructed to get the indexes from the vocabulary. Embedding layer was used as first layer in the network.
 
 ## Training a model
 
