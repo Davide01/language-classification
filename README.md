@@ -20,7 +20,7 @@ The data can be downloaded running the download_data.py script.
 python download_data.py
 ```
 
-You must specify the language code (da/sv/no) and the title of the topic for which the data should be downloaded. The title must be specified in the language you want to download for. For the training data the Politics title was used. The more topics and data you download the better the vocalbulary and the model will be, thus the more accurate predictions you will get.
+You must specify the language code (da/sv/no) and the title of the topic for which the data should be downloaded. The title must be specified in the language you want to download for. For the training data the Politics and Nature title was used. The more topics and data you download the bigger the vocalbulary and the model will be, thus the more accurate predictions you will get.
 
 ## Preprocessing
 
@@ -46,7 +46,7 @@ A lookup table was constructed to get the indexes from the vocabulary.
 
 ## Training a model
 
-The model was trained for 50 epochs with batch size 56 and learning rate 0.0005. Adam was used as optimization algorithm.
+The model was trained for 50 epochs with batch size 72 and learning rate 0.0005. Adam was used as optimization algorithm.
 CrossEntropy was used as loss function. After each epoch a validation was performed, where the loss and the accuracy of the network was calculated. In every validation the accuracy is compared to the current best model and if it's more, the weights are saved.
 
 The checkpoints of the models will are saved in
@@ -56,7 +56,7 @@ app/lang_model/data/models/{modelname}/{accuracy}_.pt.
 ```
 
 More details can be find in the notebook modelling.py.
-The highest accuracy achieved was 89 %. Of course, this can be further tuned, with improving the data, hyperparameter tuning and achitecture tuning.
+The highest accuracy achieved was 91.3 %. Of course, this can be further tuned, with improving the data, hyperparameter tuning and achitecture tuning.
 
 ## Rest API
 
