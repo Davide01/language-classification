@@ -6,7 +6,7 @@ from lang_model.model import LangModel
 
 
 class LangRecognizer:
-    def __init__(self, vocab_size: int, name: str = "LSTM") -> None:
+    def __init__(self, vocab_size: int, name: str) -> None:
         self.path = os.path.join(DATA_PATH, "models", name)
         self.vocab_size = vocab_size
         self.__load_model()
