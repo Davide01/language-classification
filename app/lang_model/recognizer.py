@@ -9,6 +9,7 @@ class LangRecognizer:
     def __init__(self, vocab_size: int, name: str) -> None:
         self.path = os.path.join(DATA_PATH, "models", name)
         self.vocab_size = vocab_size
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.__load_model()
 
     def __load_model(self) -> None:
@@ -16,7 +17,7 @@ class LangRecognizer:
         if len(models) == 0:
             raise ValueError("Wrong path.")
 
-        state_dict = torch.load(os.path.join(self.path, models[0]))
+        state_dict = torch.load(os.path.join(self.path, models[0]), map_location=torch.device(self.device))
         self.model = LangModel(self.vocab_size)
         self.model.load_state_dict(state_dict)
         self.model.eval()

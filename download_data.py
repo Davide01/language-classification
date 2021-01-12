@@ -39,7 +39,7 @@ class WikiDataDownloader:
 
     def download(self):
         cat = self.wiki.page(f"Category:{self.topic}")
-        print(f"Category members: Category:{self.topic}")
+        print(f"Category: {self.topic}")
 
         self._download_for_country(cat.categorymembers)
 
